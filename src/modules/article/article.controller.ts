@@ -1,24 +1,30 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from 'src/core/schemas/article.schema';
 
 @Controller('article')
 export class ArticleController {
     constructor(private _articleService: ArticleService){}
+
+    @Get('')
     getAllArticles() {
         return this._articleService.getAllArticles();
     }
-    getArticleById(_id) {
-        return this._articleService.getArticleById(_id);
+    @Get("/:id")
+    getArticleById(@Param('id') id) {
+        return this._articleService.getArticleById(id);
     }
-    createArticle(article: Article) {
+    @Post("")
+    createArticle(@Body() article: Article) {
         return this._articleService.createArticle(article);
     }
-    updateArticle(_id, updatedArticle: Article) {
-        return this._articleService.updateArticle(_id, updatedArticle);
+    @Put("/:id")
+    updateArticle(@Param('id') id,@Body() updatedArticle: Article) {
+        return this._articleService.updateArticle(id, updatedArticle);
     }
-    deleteArticle(_id) {
-        return this._articleService.deleteArticle(_id);
+    @Delete("/:id")
+    deleteArticle(@Param('id') id) {
+        return this._articleService.deleteArticle(id);
     }
 
 }
