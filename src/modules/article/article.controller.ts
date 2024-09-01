@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from 'src/core/schemas/article.schema';
+import { AuthGuard } from 'src/core/gaurds/auth.guard';
 
 @Controller('article')
+@UseGuards(AuthGuard)
+
 export class ArticleController {
     constructor(private _articleService: ArticleService){}
 
@@ -16,6 +19,7 @@ export class ArticleController {
     }
     @Post("")
     createArticle(@Body() article: Article) {
+        
         return this._articleService.createArticle(article);
     }
     @Put("/:id")

@@ -17,7 +17,7 @@ export class SigninService {
         if(user){
            let matched = await bcrypt.compare(info.password,user.password)
             if(matched){
-                let token = this._jwtservice.sign({name: user.username , email:user.email },{secret:"ay7aga"})
+                let token = this._jwtservice.sign({name: user.username , email:user.email , id:user._id },{secret:"ay7aga"})
                 return {message:"Welcome",token:token}
             }else{
 

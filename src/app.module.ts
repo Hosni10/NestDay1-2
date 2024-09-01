@@ -6,10 +6,12 @@ import { AuthModule } from './modules/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostsModule } from './modules/posts/posts.module';
 import { TagsModule } from './modules/tags/tags.module';
+import { ArticleModule } from './modules/article/article.module';
 
 @Module({
-  imports: [PostsModule, BlogsModule, AuthModule, MongooseModule.forRoot('mongodb://localhost/127.0.0.1:27018/nest'),TagsModule],
+  imports: [MongooseModule.forRoot('mongodb://127.0.0.1:27018/nest'),ArticleModule,PostsModule, BlogsModule, AuthModule,TagsModule],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule {}
